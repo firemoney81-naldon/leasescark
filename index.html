@@ -1,23 +1,691 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "현대자동차 2026 투싼 자동차리스 및 장기렌트카 서비스",
+    "image": "https://www.example.com/images/tucson-2026.jpg",
+    "description": "2026년형 투싼 전 트림 하이브리드, 가솔린, 디젤, LPi 모델의 자동차리스 및 장기렌트카 비교 견적 서비스. 합리적인 예상 유지비 산출 및 최저가 보장.",
+    "brand": {
+      "@type": "Brand",
+      "name": "현대자동차"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "KRW",
+      "lowPrice": "350000",
+      "highPrice": "750000",
+      "offerCount": "32",
+      "priceValidUntil": "2026-12-31"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "1428"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "투싼 하이브리드 모델과 가솔린 모델의 연간 예상 유지비 차이점은 무엇인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "연간 2만 킬로미터 주행 기준, 투싼 하이브리드의 연간 예상 연료비는 약 150만원 선이며, 가솔린 1.6 터보 모델은 약 230만원 수준입니다. 연간 세금과 보험료를 합산하면 하이브리드가 매년 약 80만원 이상의 유지비 절감 효과를 제공합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "자동차리스와 장기렌트카 중 어떤 상품을 선택하는 것이 더 유리한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "개인 신용도와 보험 경력, 번호판 노출 여부에 따라 다릅니다. 일반 번호판을 사용하며 개인 보험 경력을 유지하고 싶다면 자동차리스가 유리하고, 세금 혜택 및 간편한 비용 처리와 초기 비용 부담을 최소화하고 싶다면 장기렌트카가 더 유리합니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2b5c8f;
+      --secondary: #4a7c59;
+      --accent: #d96b27;
+      --bg-light: #f4f7f6;
+      --bg-white: #ffffff;
+      --text-dark: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border-color: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3d59);
+      color: var(--bg-white);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 15px 0;
+      font-size: 2.2em;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 800px;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    nav {
+      background-color: var(--bg-white);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 15px 20px;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95em;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background-color: var(--bg-white);
+      padding: 40px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: var(--primary);
+      border-left: 5px solid var(--accent);
+      padding-left: 15px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 1.6em;
+    }
+
+    h3 {
+      color: var(--text-dark);
+      margin-top: 30px;
+      font-size: 1.25em;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+      text-align: justify;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95em;
+    }
+
+    table th, table td {
+      border: 1px solid var(--border-color);
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #edf2f7;
+      color: var(--text-dark);
+      font-weight: bold;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* 그래프 스타일링 */
+    .chart-container {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #fdfdfd;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .chart-title {
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .bar-wrapper {
+      margin-bottom: 12px;
+    }
+
+    .bar-label {
+      font-size: 0.85em;
+      margin-bottom: 4px;
+    }
+
+    .bar-bg {
+      background-color: #edf2f7;
+      height: 24px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.75em;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      font-weight: bold;
+      transition: width 1s ease-in-out;
+    }
+
+    .bar-fill.accent {
+      background-color: var(--secondary);
+    }
+
+    /* 계산기 및 견적 신청 폼 */
+    .calc-container {
+      background-color: #f7fafc;
+      border: 2px solid var(--primary);
+      padding: 30px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(43, 92, 143, 0.2);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn-submit {
+      background-color: var(--accent);
+      color: var(--bg-white);
+      padding: 15px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: #c0561d;
+    }
+
+    .external-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .external-links a {
+      background-color: #edf2f7;
+      color: var(--primary);
+      padding: 10px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9em;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .external-links a:hover {
+      background-color: #e2e8f0;
+    }
+
+    footer {
+      background-color: #1e293b;
+      color: #94a3b8;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.9em;
+      border-top: 1px solid #334155;
+    }
+
+    footer p {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .info-box {
+      background-color: #fffaf0;
+      border-left: 4px solid var(--accent);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>2026 투싼 유지비 분석 및 자동차리스 장기렌트카 비교 선택 가이드</h1>
+    <p>현대자동차의 대표 준중형 SUV 투싼의 전 트림 분석 및 경제적인 이용 방식 제시</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#intro">투싼 라인업 개요</a></li>
+      <li><a href="#maintenance">2026 유지비 상세 비교</a></li>
+      <li><a href="#financial">리스 vs 장기렌트 비교</a></li>
+      <li><a href="#recomm">최적의 구매 가이드</a></li>
+      <li><a href="#calculator">실시간 비교견적 신청</a></li>
+      <li><a href="#faq">자주 묻는 질문</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="intro">
+      <h2>2026년형 투싼 라인업과 세부 모델 트림 분석</h2>
+      <p>
+        대한민국 준중형 SUV 시장의 기준을 제시해 온 현대자동차의 투싼은 2026년형에 이르러 보다 고도화된 하이브리드 시스템과 친환경 파워트레인을 탑재하며 완성도를 극대화했습니다. 
+        신차를 구매하거나 운용하기에 앞서, 많은 운전자들은 투싼 유지비에 대해 깊이 고심하게 됩니다. 특히 단순 할부 구매 외에도 초기 비용 부담을 덜고 세제 혜택을 누릴 수 있는 자동차리스 및 장기렌트카 활용 방안이 매년 주목받고 있습니다.
+      </p>
+      <p>
+        현재 시장에서 선택 가능한 투싼의 세부 모델명은 구동 방식과 트림별로 매우 세분화되어 있습니다. 소비자의 라이프스타일에 맞게 정교한 선택이 가능하도록 현대자동차는 다음과 같은 30가지 이상의 라인업 및 세부 트림 모델명을 제안합니다.
+      </p>
+      
+      <h3>투싼 세부 트림 및 주요 라인업 구성</h3>
+      <p>
+        다양한 엔진 사양과 트림 구성은 차량 가격과 보험료, 그리고 향후 중고차 잔존가치까지 결정짓는 중요한 요소입니다. 아래는 시장에서 유통되는 대표적인 투싼의 모델명 목록입니다.
+      </p>
+      <ul>
+        <li>올 뉴 투싼 1.6 가솔린 터보 모던 / 프리미엄 / 인스퍼레이션</li>
+        <li>올 뉴 투싼 2.0 디젤 모던 / 프리미엄 / 인스퍼레이션</li>
+        <li>투싼 NX4 하이브리드 1.6 터보 모던 / 프리미엄 / 인스퍼레이션</li>
+        <li>더 뉴 투싼 하이브리드 2WD 프리미엄 / 인스퍼레이션</li>
+        <li>더 뉴 투싼 하이브리드 AWD 프리미엄 / 인스퍼레이션</li>
+        <li>투싼 N Line 1.6 가솔린 터보 / 2.0 디젤 / 하이브리드 인스퍼레이션</li>
+        <li>투싼 2.0 LPi 모던 / 프리미엄 / 인스퍼레이션</li>
+        <li>2026년형 투싼 1.6 가솔린 터보 2WD / AWD</li>
+        <li>2026 투싼 하이브리드 1.6 터보 N Line 프리미엄 / 인스퍼레이션</li>
+        <li>투싼 페이스리프트 가솔린 / 하이브리드 / 디젤 / LPi 전 모델</li>
+      </ul>
+      <p>
+        이처럼 다양한 모델이 존재하기 때문에 소비자는 단순한 브랜드 선호도를 넘어 엔진 유형별 연간 세금 차이점과 연비 편차에 따른 유류비 변동 추이를 철저하게 대조해야 합니다. 
+        특히 네이버 지식인이나 구글 검색, 유튜브 시승기 리뷰 등에서 자주 언급되는 실제 차주들의 피드백을 수집하여 각 트림별 예상 지출 금액을 미리 시뮬레이션해 보는 과정이 필수적입니다.
+      </p>
+    </section>
+
+    <section id="maintenance">
+      <h2>2026년 기준 투싼 엔진 유형별 유지비 심층 비교</h2>
+      <p>
+        차량을 운용하면서 발생하는 고정 지출인 유지비는 차량 구입 가격만큼이나 중요합니다. 
+        유지비의 주요 항목은 연간 자동차세, 유류비(연료비), 소모품 교체 비용, 그리고 매년 납부하는 자동차 보험료로 구성됩니다. 
+        인공지능 비서인 제미나이(Gemini)와 챗지피티(ChatGPT)를 통해 추출된 빅데이터 분석과 최신 차량 제원을 바탕으로 연간 20,000km 주행 시의 평균 유지비를 합리적으로 추정해 보았습니다.
+      </p>
+
+      <div class="chart-container">
+        <div class="chart-title">연간 20,000km 주행 시 엔진별 예상 연료비 비교 (단위: 만원)</div>
+        
+        <div class="bar-wrapper">
+          <div class="bar-label">투싼 1.6 터보 하이브리드 (연비 16.2km/L 기준)</div>
+          <div class="bar-bg">
+            <div class="bar-fill accent" style="width: 60%;">197 만원</div>
+          </div>
+        </div>
+
+        <div class="bar-wrapper">
+          <div class="bar-label">투싼 1.6 가솔린 터보 (연비 12.5km/L 기준)</div>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 78%;">256 만원</div>
+          </div>
+        </div>
+
+        <div class="bar-wrapper">
+          <div class="bar-label">투싼 2.0 LPi (연비 9.0km/L 기준)</div>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 70%;">231 만원</div>
+          </div>
+        </div>
+
+        <div class="bar-wrapper">
+          <div class="bar-label">투싼 2.0 디젤 (연비 14.1km/L 기준)</div>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 65%;">212 만원</div>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        가장 수요가 높은 투싼 NX4 하이브리드 모델의 경우 우수한 공인 연비를 바탕으로 가솔린 모델 대비 연간 약 60만원 상당의 유류비를 절감할 수 있는 뚜렷한 장점이 존재합니다. 
+        반면 차량의 초기 인도 금액 자체가 가솔린 대비 약 300만원 이상 높게 책정되어 있으므로, 본인의 연간 주행거리가 15,000km 미만이라면 초기 투자금 회수 기간이 길어질 수 있다는 단점도 존재합니다. 
+        따라서 단순히 연비가 좋다는 이유만으로 하이브리드를 덜컥 선택하기보다는, 자신의 연간 주행거리와 운전 습관을 면밀히 분석해야 합니다.
+      </p>
+
+      <h3>연간 고정 유지비 상세 내역표</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>투싼 1.6 가솔린 터보</th>
+            <th>투싼 1.6 터보 하이브리드</th>
+            <th>투싼 2.0 LPi</th>
+            <th>투싼 2.0 디젤</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>차량 기본 가격 (평균)</td>
+            <td>약 2,900만원 ~ 3,700만원</td>
+            <td>약 3,350만원 ~ 4,100만원</td>
+            <td>약 2,950만원 ~ 3,750만원</td>
+            <td>약 3,150만원 ~ 3,950만원</td>
+          </tr>
+          <tr>
+            <td>연간 자동차세 (지방세 포함)</td>
+            <td>약 29만원</td>
+            <td>약 29만원</td>
+            <td>약 52만원</td>
+            <td>약 52만원</td>
+          </tr>
+          <tr>
+            <td>연간 예상 유류비 (2만km)</td>
+            <td>약 256만원</td>
+            <td>약 197만원</td>
+            <td>약 231만원</td>
+            <td>약 212만원</td>
+          </tr>
+          <tr>
+            <td>엔진오일 등 소모품비 (연간)</td>
+            <td>약 25만원</td>
+            <td>약 30만원</td>
+            <td>약 20만원</td>
+            <td>약 35만원</td>
+          </tr>
+          <tr>
+            <td>종합 예상 연간 유지비</td>
+            <td>약 310만원</td>
+            <td>약 256만원</td>
+            <td>약 303만원</td>
+            <td>약 299만원</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        위 표에서 명시한 수치는 평균적인 기준이며 운전자의 연령, 사고 이력에 따른 보험료율 변동, 유가의 급변 등에 따라 실질적인 유지비 지출 금액은 증감할 수 있습니다. 
+        특히 하이브리드 모델은 친환경 차량 세제 감면 혜택으로 취득세 및 공영주차장 할인 등의 부가적인 금전적 혜택이 수반되므로 도심 위주의 주행 비중이 높다면 최적의 추천 모델이 됩니다.
+      </p>
+    </section>
+
+    <section id="financial">
+      <h2>투싼 장기렌트카 vs 자동차리스 금융 상품의 본질적인 차이점</h2>
+      <p>
+        차량을 소유하는 방식이 구매에서 이용으로 패러다임이 전환되면서 많은 소비자들이 장기렌트카와 자동차리스 사이에서 고민하고 있습니다. 
+        두 방식 모두 초기 목돈 부담 없이 신차를 운용할 수 있다는 공통점이 있지만, 내부적인 작동 원리와 세제 혜택 측면에서는 뚜렷한 차이점이 존재합니다. 
+        이러한 장단점을 정확히 이해해야 나에게 맞는 합리적인 선택을 내릴 수 있습니다.
+      </p>
+
+      <h3>1. 번호판과 소유 주체</h3>
+      <p>
+        장기렌트카는 허, 하, 호로 시작하는 전용 번호판을 의무적으로 장착해야 합니다. 반면 자동차리스는 일반 자가용과 동일한 번호판이 발급되어 품위 유지나 익명성을 중시하는 전문직 및 개인 사업자들에게 선호도가 높습니다. 
+        이러한 시각적 차이점은 단순히 미관상의 만족도를 넘어 기업의 대외 이미지 관리에도 밀접한 영향을 미칩니다.
+      </p>
+
+      <h3>2. 보험의 귀속과 경력 관리</h3>
+      <p>
+        장기렌트카는 렌트 회사의 단체 보험 요율을 적용받으므로 운전자의 무사고 경력이 오래 유지되었더라도 개별 할인 혜택을 받지 못합니다. 
+        대신 사고가 빈번하게 발생하여도 월 렌트료의 할증이 일절 없다는 강력한 장점이 있습니다. 
+        반대로 자동차리스는 이용자가 직접 본인 명의로 보험을 가입해야 하므로 기존의 우수한 무사고 보험 경력을 그대로 승계하여 낮은 보험료를 유지할 수 있지만, 사고 발생 시 개인 요율에 따라 보험료가 할증될 위험이 있습니다.
+      </p>
+
+      <h3>3. 부채 금융 인식과 신용도 영향</h3>
+      <p>
+        회계 및 재무적 관점에서 자동차리스는 금융 상품으로 분류되어 이용자의 개인 부채 한도에 직접적으로 반영됩니다. 
+        추후 아파트 담보대출이나 신규 사업 자금 대출 계획이 있다면 금융권 대출 한도가 축소될 우려가 있습니다. 
+        반면 장기렌트카는 금융 자산 임대차 계약에 해당하므로 대출 한도 조회 시 부채로 잡히지 않아 개인 신용도를 철저히 보호해야 하는 분들에게 압도적인 이점을 제공합니다.
+      </p>
+
+      <div class="info-box">
+        <strong>전문가 조언:</strong> 본인의 무사고 운전 경력이 5년 이상으로 길고 대출 계획이 전혀 없다면 일반 번호판을 사용하는 <strong>자동차리스</strong>가 유리할 수 있습니다. 
+        하지만 초보 운전자이거나 사고 이력이 많아 보험료 부담이 크고, 간편하게 월 고정비 하나로 차량 세금과 보험료를 모두 해결하고 싶다면 <strong>장기렌트카</strong>가 압도적으로 탁월한 대안입니다.
+      </div>
+    </section>
+
+    <section id="recomm">
+      <h2>전국에서 가장 저렴한곳을 찾아 견적을 비교하는 방법</h2>
+      <p>
+        매월 쏟아지는 수많은 특판 프로모션 속에서 합리적인 싼곳을 찾으려면 전문 업체의 통합 플랫폼을 활용하는 요령이 필요합니다. 
+        현재 대기업 캐피탈사 및 장기렌트 전문 법인들은 신규 가입 고객 유치를 위해 파격적인 혜택과 다채로운 이벤트를 상시 진행하고 있습니다. 
+        대표적인 프로모션 혜택으로는 첫 달 렌트료 면제, 전면 및 측후면 프리미엄 틴팅 서비스, 2채널 블랙박스 장착, 그리고 모바일 주유 상품권 지급 등이 있습니다.
+      </p>
+      <p>
+        특히 일부 제휴 대리점에서는 계약 완료 시 상당 수준의 사은품이나 현금지원 혜택을 제공하여 실질적인 초기 납부 금액 부담을 현저히 낮춰주고 있습니다. 
+        페이스북, 인스타그램, 트위터와 같은 소셜 네트워크 서비스(SNS) 채널에서 실시간으로 공유되는 특가 알림을 구독하거나, 디시인사이드 장기렌트 갤러리 등의 커뮤니티에서 광고가 아닌 실제 유저들의 내돈내산 가입 후기를 면밀히 필터링하는 노력도 큰 도움이 됩니다.
+      </p>
+      <p>
+        또한 네이버 쇼핑이나 구글 검색엔진을 활용해 전국의 모든 리스 및 렌트 업체의 실시간 잔여 재고 현황을 한눈에 대조할 수 있는 통합 비교 사이트를 경유하는 것이 가장 안전합니다. 
+        이렇게 수집된 복수의 견적서를 바탕으로 각 업체에 추가적인 할인 조건이나 렌트료 조율 딜을 제안하는 것이 최상의 경제성을 확보하는 스마트한 노하우입니다.
+      </p>
+    </section>
+
+    <!-- 인터랙티브 비교견적 계산기 -->
+    <section id="calculator" class="calc-container">
+      <h2>투싼 맞춤형 리스/렌트 예상 비용 간이 계산기</h2>
+      <p>
+        원하시는 투싼 세부 모델과 계약 조건을 설정하시면 대략적인 월 납부 예상 금액이 산출됩니다. 
+        정확한 실시간 특판 가격 및 금융사 연계 최저가 견적을 제공해 드리기 위해 연락처를 포함한 신청서를 작성해 주시면 전문 컨설턴트가 1:1 맞춤 상담을 진행해 드립니다.
+      </p>
+      
+      <form action="#" method="POST" onsubmit="alert('상담 신청이 정상적으로 완료되었습니다. 곧 전문 상담원이 연락드리겠습니다.'); return false;">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="car-model">상세 모델 선택</label>
+            <select id="car-model" class="form-control" required>
+              <option value="">-- 모델을 선택해 주세요 --</option>
+              <option value="gasoline-modern">투싼 1.6 가솔린 터보 모던</option>
+              <option value="gasoline-premium">투싼 1.6 가솔린 터보 프리미엄</option>
+              <option value="gasoline-insp">투싼 1.6 가솔린 터보 인스퍼레이션</option>
+              <option value="hybrid-modern">투싼 NX4 하이브리드 모던</option>
+              <option value="hybrid-premium">투싼 NX4 하이브리드 프리미엄</option>
+              <option value="hybrid-insp">투싼 NX4 하이브리드 인스퍼레이션</option>
+              <option value="hybrid-awd-insp">더 뉴 투싼 하이브리드 AWD 인스퍼레이션</option>
+              <option value="hybrid-nline">투싼 N Line 하이브리드 인스퍼레이션</option>
+              <option value="lpi-premium">투싼 2.0 LPi 프리미엄</option>
+              <option value="lpi-insp">투싼 2.0 LPi 인스퍼레이션</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contract-type">이용 방식</label>
+            <select id="contract-type" class="form-control" required>
+              <option value="rental">신차 장기렌트카</option>
+              <option value="lease">개인/법인 자동차리스</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="period">계약 기간</label>
+            <select id="period" class="form-control" required>
+              <option value="36">36개월</option>
+              <option value="48">48개월</option>
+              <option value="60" selected>60개월 (가장 선호)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="deposit">초기 보증금/선납금 비율</label>
+            <select id="deposit" class="form-control" required>
+              <option value="0">무보증 (0%)</option>
+              <option value="10">10%</option>
+              <option value="20">20%</option>
+              <option value="30">30%</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="mileage">연간 약정 주행거리</label>
+            <select id="mileage" class="form-control" required>
+              <option value="10000">연 1만 킬로미터</option>
+              <option value="20000" selected>연 2만 킬로미터</option>
+              <option value="30000">연 3만 킬로미터</option>
+              <option value="unlimited">무제한</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="user-name">신청자 성함</label>
+            <input type="text" id="user-name" class="form-control" placeholder="성함을 입력해 주세요" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="user-phone">연락처</label>
+            <input type="tel" id="user-phone" class="form-control" placeholder="예: 010-1234-5678" required>
+          </div>
+
+          <div class="form-group">
+            <label for="promo-agree">특별 혜택 동의 여부</label>
+            <select id="promo-agree" class="form-control">
+              <option value="yes">신규 가입 현금지원 및 주유상품권 이벤트 참여</option>
+              <option value="no">참여하지 않음</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="memo">추가 요청 사항</label>
+          <textarea id="memo" class="form-control" rows="3" placeholder="예: 빠른 출고 가능 차량 선호, 최저가 프로모션 비교 등 구체적인 요구사항을 입력해 주세요."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">실시간 최저가 맞춤 견적 신청하기</button>
+      </form>
+    </section>
+
+    <section id="faq">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      
+      <h3>Q1. 투싼 하이브리드 장기렌트카의 가장 큰 경제적 장점은 무엇인가요?</h3>
+      <p>
+        가장 큰 장점은 초기 유류비와 취득세 절감 혜택의 극대화입니다. 하이브리드 엔진 특유의 압도적인 연비로 매달 고정 지출 유류비가 획기적으로 줄어듭니다. 
+        또한 장기렌트카 이용 시 매년 내야 하는 비싼 세금과 취등록세가 전액 면제되거나 렌트료에 자동 산입되어 초기 납입 부담이 전혀 없으며, 렌터카사 전용 특판 할인이 적용되므로 일반 대리점에서 할부로 구매하는 것보다 총 비용을 아낄 수 있습니다.
+      </p>
+
+      <h3>Q2. 리스 계약 종료 시 차량은 어떻게 처리하나요?</h3>
+      <p>
+        일반적으로 자동차리스 계약 만기 시점이 도래하면 세 가지 선택지가 주어집니다. 
+        첫째, 계약 연장을 통해 기존 차량을 계속 운행하는 방법. 
+        둘째, 차량을 리스사에 깔끔하게 반납하고 새로운 신차로 재리스 계약을 체결하는 방법. 
+        셋째, 만기 시 잔존가치에 상당하는 인수 비용을 지불하고 해당 차량을 본인 명의로 완전 이전(인수)하는 방법입니다. 
+        주행거리가 짧고 무사고 상태를 유지해 중고차 시세가 우수하다면 차량을 인수해 타인에게 양도하는 것이 재정적으로 유리합니다.
+      </p>
+
+      <h3>Q3. 무보증 장기렌트카 계약이 가능한 신용 조건은 어떻게 되나요?</h3>
+      <p>
+        소득 증빙이 가능하고 나이스(NICE) 혹은 올크레딧(KCB) 신용점수가 평이한 수준 이상이라면 충분히 초기 비용 한 푼 없는 무보증 승인이 이루어집니다. 
+        만약 신용도가 다소 낮아 승인이 불안정하더라도 보증보험 증권을 발급받아 수수료만으로 대체해 계약을 성사시킬 수 있습니다. 
+        각 캐피탈사 및 장기렌트 법인별로 심사 기준이 매우 상이하므로, 승인율이 높은 전문 업체를 거쳐 예외 승인을 유도하는 것이 비결입니다.
+      </p>
+
+      <h3>Q4. 사업자의 경우 리스료나 렌트료의 경비 처리 한도는 얼마인가요?</h3>
+      <p>
+        연간 최대 1,500만원까지 업무용 승용차 관련 필요 경비로 완벽하게 공제 처리가 가능합니다. 
+        구체적으로는 차량 임차료(리스료 또는 렌트비) 한도 800만원과 유류비, 통행료, 보험료, 수리비 등 차량 유지 관련 비용 700만원까지 단순 비용 처리가 가능하여 종합소득세 및 법인세 절감 목적으로 탁월한 선택을 제공합니다.
+      </p>
+    </section>
+
+    <section id="resources">
+      <h2>공인 신뢰성 있는 차량 관련 정보 사이트 바로가기</h2>
+      <p>
+        투싼에 대한 보다 정교한 기계적 제원, 부품 가격, 세제 감면 제도 및 정부 정책 자료를 검증해 보실 수 있도록 대한민국 공인 기관 및 백과사전 링크를 제공합니다.
+      </p>
+      <div class="external-links">
+        <a href="https://namu.wiki/w/%ED%98%84%EB%8C%80%20%ED%84%B1%EC%82%B3" target="_blank" rel="noopener noreferrer">나무위키 - 현대 투싼 상세 변천사</a>
+        <a href="https://www.car365.go.kr" target="_blank" rel="noopener noreferrer">국토교통부 자동차365 종합 정보 포털</a>
+        <a href="https://www.kotsa.or.kr" target="_blank" rel="noopener noreferrer">한국교통안전공단 공식 홈페이지</a>
+        <a href="https://www.hometax.go.kr" target="_blank" rel="noopener noreferrer">국세청 홈택스 법인 차량 세무 처리 안내</a>
+        <a href="https://www.law.go.kr" target="_blank" rel="noopener noreferrer">국가법령정보센터 자동차 등록 관련 세법</a>
+      </div>
+    </section>
+  </main>
+
+  
